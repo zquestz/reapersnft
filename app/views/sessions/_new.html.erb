@@ -1,0 +1,12 @@
+<div class="new_session_container">
+  <%= form_tag 'sessions', class: 'new_session' do %>
+    <%= hidden_field_tag :eth_address, '', readonly: true, class: 'eth_address' %> <br/>
+    <%= hidden_field_tag :eth_signature, '', readonly: true, class: 'eth_signature' %> <br/>
+    <%= hidden_field_tag :redirect_path, '', readonly: true, class: 'redirect_path' %> <br/>
+  <% end %>
+</div>
+<script>
+    document.addEventListener('turbo:load', function (_event) {
+        attachWalletBinding();
+    });
+</script>

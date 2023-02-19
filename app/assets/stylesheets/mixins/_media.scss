@@ -1,0 +1,15 @@
+@mixin media($query) {
+ @if $query == mobile {
+    @media only screen and (max-width: 650px) {
+      @content;
+    }
+  } @else if $query == tablet {
+    @media (max-width: 1000px) {
+      @content;
+    }
+  } @else {
+    @media (min-width: 1000px) {
+      @content;
+    }
+  }
+}

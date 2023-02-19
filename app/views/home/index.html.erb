@@ -1,0 +1,34 @@
+<div class="logged-out-section">
+  <img src="<%= asset_path('logo.png') %>" alt="Reapers Logo" class="logo"/>
+</div>
+<div class="social">
+  <a href="https://github.com/zquestz/reapersnft" target="_blank"><img src="<%= asset_path('social/github-alt-brands.svg') %>" /></a>
+  <a href="https://www.instagram.com/thereapernft" target="_blank"><img src="<%= asset_path('social/instagram-brands.svg') %>" /></a>
+  <a href="https://t.me/ReapersNFT" target="_blank"><img src="<%= asset_path('social/telegram-plane-brands.svg') %>" /></a>
+  <a href="https://twitter.com/ReapersNFT" target="_blank"><img src="<%= asset_path('social/twitter-brands.svg') %>" /></a>
+</div>
+<%- if logged_in? -%>
+  <div class="logged-in-container">
+    <div class="eth-address">
+      <%= current_user.eth_address %>
+    </div>
+  </div>
+<% end %>
+<div class="videos">
+  <div class="video">
+    <iframe class="youtube-video" src="https://www.youtube.com/embed/sqGxt-LYLTw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+  </div>
+  <div class="summary">
+    <p>
+      Introducing "Reaper's Revenge," the latest project from Native American artist Dennis Romero. Launching on the Ethereum network in April, "Reaper's Revenge" features an upgraded version of Romero's original reapers collection inspired by his childhood interests in Star Wars, V for Vendetta, Naruto, and graffiti.
+    </p>
+  </div>
+  <div class="video">
+    <iframe class="youtube-video" src="https://www.youtube.com/embed/cOMJEnhb51I" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+  </div>
+  <div class="summary">
+    <p>
+      With an array of tools and abilities, these digital grim reapers are a unique addition to any digital art collection. Join Romero in the digital art revolution and experience the magic of "Reaper's Revenge." Don't miss your chance to support an artist who's dedicated his life to pushing the boundaries of art and design.
+    </p>
+  </div>
+</div>

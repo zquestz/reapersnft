@@ -1,0 +1,12 @@
+body {
+  background-color: var(--primary-background);
+  font-family: Arial, Helvetica, sans-serif;
+  color: $primary-text-color;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.hidden {
+  display: none;
+}

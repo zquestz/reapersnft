@@ -1,0 +1,12 @@
+@mixin page-bg {
+  background-color: $primary-background-color;
+  background-size: cover;
+  background-position: center;
+  color: $primary-text-color;
+
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}

@@ -1,0 +1,14 @@
+header {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding: $padding-standard;
+}
+
+a.logout {
+  color: $primary-text-color;
+  text-decoration: none;
+  visited: {
+    color: $primary-text-color;
+  }
+}

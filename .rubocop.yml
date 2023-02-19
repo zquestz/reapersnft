@@ -1,0 +1,20 @@
+require:
+  - rubocop-rake
+  - rubocop-rails
+  - rubocop-rspec
+Metrics/AbcSize:
+  Max: 25
+Metrics/MethodLength:
+  Max: 50
+RSpec/ExampleLength:
+  Max: 20
+RSpec/MultipleExpectations:
+  Enabled: false
+RSpec/MultipleMemoizedHelpers:
+  Max: 10
+AllCops:
+  NewCops: enable
+  Exclude:
+    - config/**/*
+    - bin/**/*
+    - db/**/*

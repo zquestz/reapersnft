@@ -1,0 +1,14 @@
+@import 'config/vars';
+@import 'config/fonts';
+@import 'config/normalize';
+@import 'config/common';
+
+@import 'mixins/screen';
+@import 'mixins/media';
+
+@import 'layouts/screen';
+@import 'layouts/header';
+@import 'layouts/content';
+@import 'layouts/footer';
+
+@import 'pages/home';
