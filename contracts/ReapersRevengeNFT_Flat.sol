@@ -1454,10 +1454,10 @@ contract ERC721r is Context, ERC165, IERC721, IERC721Metadata {
             _mintIdWithoutBalanceUpdate(to, tokenId);
 
             --updatedNumAvailableTokens;
+            _balances[to] += 1;
         }
 
         _numAvailableTokens = updatedNumAvailableTokens;
-        _balances[to] += _numToMint;
     }
 
     function getRandomAvailableTokenId(
