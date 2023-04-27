@@ -1900,6 +1900,11 @@ contract ReapersRevengeNFT is ERC721Enumerable, Ownable {
     // This method does not check if minting is paused.
     function mintsRemaining(address addr) public view returns (uint256) {
         bool guest = guestList[addr] == 1;
+
+        if (msg.sender == owner()) {
+            return maxGuestMints;
+        }
+
         if (happyHour && !guest) {
             return 0;
         }
@@ -1991,4 +1996,3 @@ contract ReapersRevengeNFT is ERC721Enumerable, Ownable {
         require(os);
     }
 }
-
