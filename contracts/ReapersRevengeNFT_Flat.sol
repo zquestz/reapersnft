@@ -1676,6 +1676,7 @@ contract ERC721r is Context, ERC165, IERC721, IERC721Metadata {
         uint256 tokenId
     ) internal virtual {}
 }
+
 // File: @openzeppelin/contracts/token/ERC721/extensions/IERC721Enumerable.sol
 
 // OpenZeppelin Contracts (last updated v4.5.0) (token/ERC721/extensions/IERC721Enumerable.sol)

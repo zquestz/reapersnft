@@ -191,6 +191,8 @@ abstract contract ERC721Enumerable is ERC721r, IERC721Enumerable {
     }
 }
 
+// SPDX-License-Identifier: MIT
+
 pragma solidity >=0.7.0 <0.9.0;
 
 contract ReapersRevengeNFT is ERC721Enumerable, Ownable {
