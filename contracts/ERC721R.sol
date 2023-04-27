@@ -1,5 +1,4 @@
 // SPDX-License-Identifier: MIT
-// Github: https://github.com/erc721r/ERC721R
 
 pragma solidity ^0.8.0;
 
@@ -327,10 +326,10 @@ contract ERC721r is Context, ERC165, IERC721, IERC721Metadata {
             _mintIdWithoutBalanceUpdate(to, tokenId);
 
             --updatedNumAvailableTokens;
-            _balances[to] += 1;
         }
 
         _numAvailableTokens = updatedNumAvailableTokens;
+        _balances[to] += _numToMint;
     }
 
     function getRandomAvailableTokenId(
@@ -344,7 +343,7 @@ contract ERC721r is Context, ERC165, IERC721, IERC721Metadata {
                     tx.gasprice,
                     block.number,
                     block.timestamp,
-                    block.prevrandao,
+                    block.difficulty,
                     blockhash(block.number - 1),
                     address(this),
                     updatedNumAvailableTokens
@@ -371,19 +370,21 @@ contract ERC721r is Context, ERC165, IERC721, IERC721Metadata {
         }
 
         uint256 lastIndex = updatedNumAvailableTokens - 1;
+        uint256 lastValInArray = _availableTokens[lastIndex];
         if (indexToUse != lastIndex) {
             // Replace the value at indexToUse, now that it's been used.
             // Replace it with the data from the last index in the array, since we are going to decrease the array size afterwards.
-            uint256 lastValInArray = _availableTokens[lastIndex];
             if (lastValInArray == 0) {
                 // This means the index itself is still an available token
                 _availableTokens[indexToUse] = lastIndex;
             } else {
                 // This means the index itself is not an available token, but the val at that index is.
                 _availableTokens[indexToUse] = lastValInArray;
-                // Gas refund courtsey of @dievardump
-                delete _availableTokens[lastIndex];
             }
+        }
+        if (lastValInArray != 0) {
+            // Gas refund courtsey of @dievardump
+            delete _availableTokens[lastIndex];
         }
 
         return result;

@@ -248,7 +248,10 @@ contract ReapersRevengeNFT is ERC721Enumerable, Ownable {
             }
 
             if (guest) {
-                require(msg.value >= guestCost * _mintAmount, "Insufficient ETH");
+                require(
+                    msg.value >= guestCost * _mintAmount,
+                    "Insufficient ETH"
+                );
             } else {
                 require(msg.value >= cost * _mintAmount, "Insufficient ETH");
             }
