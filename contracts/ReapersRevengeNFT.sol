@@ -232,31 +232,31 @@ contract ReapersRevengeNFT is ERC721Enumerable, Ownable {
 
     // public
     function mint(uint256 _mintAmount) public payable {
-        require(!paused, " Minting is paused");
+        require(!paused, "Minting is paused");
 
-        require(_mintAmount > 0, " Invalid mint quantity");
+        require(_mintAmount > 0, "Invalid mint quantity");
         require(
             totalSupply() + _mintAmount <= maxSupply(),
-            " Not enough supply"
+            "Not enough supply"
         );
 
         // apply mint limits for guests and public
         if (msg.sender != owner()) {
             bool guest = guestList[msg.sender] == 1;
             if (happyHour) {
-                require(guest, " Minting is currently open only to guest list");
+                require(guest, "Minting is currently open only to guest list");
             }
 
             if (guest) {
-                require(msg.value >= guestCost * _mintAmount);
+                require(msg.value >= guestCost * _mintAmount, "Insufficient ETH");
             } else {
-                require(msg.value >= cost * _mintAmount);
+                require(msg.value >= cost * _mintAmount, "Insufficient ETH");
             }
 
             uint256 maxMints = (guest ? maxGuestMints : maxPublicMints);
             require(
                 mintList[msg.sender] + _mintAmount <= maxMints,
-                " Insufficient mints remaining"
+                "Insufficient mints remaining"
             );
         }
 
