@@ -337,6 +337,14 @@ contract ReapersRevengeNFT is ERC721Enumerable, Ownable {
         }
     }
 
+    function setCost(uint256 _newCost) public onlyOwner {
+        cost = _newCost;
+    }
+
+    function setGuestCost(uint256 _newGuestCost) public onlyOwner {
+        guestCost = _newGuestCost;
+    }
+
     function setMaxGuestMintAmount(
         uint256 _newMaxGuestMintAmount
     ) public onlyOwner {
