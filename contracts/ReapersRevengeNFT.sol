@@ -205,7 +205,10 @@ contract ReapersRevengeNFT is ERC721Enumerable, Ownable {
     bool public happyHour = true;
 
     // Long term Reaper holders can mint a bunch if they want.
-    uint256 public maxGuestMints = 250;
+    uint256 public maxHolderMints = 250;
+
+    // Guest list gets 10.
+    uint256 public maxGuestMints = 10;
 
     // Public mint will be limited to 5 per address.
     uint256 public maxPublicMints = 5;
@@ -213,6 +216,10 @@ contract ReapersRevengeNFT is ERC721Enumerable, Ownable {
     // Guests get half off!
     uint256 public cost = 0.02 ether;
     uint256 public guestCost = 0.01 ether;
+
+    // Holder list. A mapping to 1 indicates,
+    // that an address is a holder.
+    mapping(address => uint8) public holderList;
 
     // Guest list. A mapping to 1 indicates,
     // that an address is a happy hour guest.
@@ -245,11 +252,17 @@ contract ReapersRevengeNFT is ERC721Enumerable, Ownable {
         // apply mint limits for guests and public
         if (msg.sender != owner()) {
             bool guest = guestList[msg.sender] == 1;
+            bool holder = holderList[msg.sender] == 1;
+
             if (happyHour) {
-                require(guest, "Minting is currently open only to guest list");
+                require(
+                    guest,
+                    "Minting is currently open only to holders and guest list"
+                );
             }
 
-            if (guest) {
+            // Holders and guests get the same price.
+            if (guest || holder) {
                 require(
                     msg.value >= guestCost * _mintAmount,
                     "Insufficient ETH"
@@ -259,6 +272,10 @@ contract ReapersRevengeNFT is ERC721Enumerable, Ownable {
             }
 
             uint256 maxMints = (guest ? maxGuestMints : maxPublicMints);
+            if (holder) {
+                maxMints = maxHolderMints;
+            }
+
             require(
                 mintList[msg.sender] + _mintAmount <= maxMints,
                 "Insufficient mints remaining"
@@ -276,16 +293,21 @@ contract ReapersRevengeNFT is ERC721Enumerable, Ownable {
     // This method does not check if minting is paused.
     function mintsRemaining(address addr) public view returns (uint256) {
         bool guest = guestList[addr] == 1;
+        bool holder = holderList[addr] == 1;
 
-        if (msg.sender == owner()) {
-            return maxGuestMints;
+        if (addr == owner()) {
+            return maxHolderMints;
         }
 
-        if (happyHour && !guest) {
+        if (happyHour && !guest && !holder) {
             return 0;
         }
 
         uint256 maxMints = (guest ? maxGuestMints : maxPublicMints);
+        if (holder) {
+            maxMints = maxHolderMints;
+        }
+
         if (mintList[addr] >= maxMints) {
             return 0;
         } else {
@@ -323,6 +345,18 @@ contract ReapersRevengeNFT is ERC721Enumerable, Ownable {
             tokenIds[i] = tokenOfOwnerByIndex(_owner, i);
         }
         return tokenIds;
+    }
+
+    function seedHolderList(address[] calldata addresses) external onlyOwner {
+        for (uint256 i = 0; i < addresses.length; i++) {
+            holderList[addresses[i]] = 1;
+        }
+    }
+
+    function removeHolderList(address[] calldata addresses) external onlyOwner {
+        for (uint256 i = 0; i < addresses.length; i++) {
+            holderList[addresses[i]] = 0;
+        }
     }
 
     function seedGuestList(address[] calldata addresses) external onlyOwner {
