@@ -256,7 +256,7 @@ contract ReapersRevengeNFT is ERC721Enumerable, Ownable {
 
             if (happyHour) {
                 require(
-                    guest,
+                    (guest || holder),
                     "Minting is currently open only to holders and guest list"
                 );
             }
