@@ -9,5 +9,8 @@
     "dotenv": "^16.0.3",
     "truffle": "^5.8.4",
     "truffle-plugin-verify": "^0.6.3"
+  },
+  "dependencies": {
+    "truffle-flattener": "^1.6.0"
   }
 }
