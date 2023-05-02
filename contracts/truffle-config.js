@@ -17,7 +17,7 @@ module.exports = {
         return new HDWalletProvider(process.env.MNEMONIC, `https://mainnet.infura.io/v3/${process.env.INFURA_ID}`);
       },
       gas: 0x7a1200,
-      network_id: 5,
+      network_id: 1,
       skipDryRun: true,
     },
     goerli: {
