@@ -1,0 +1,13 @@
+{
+  "name": "reapersnft-contracts",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "@openzeppelin/contracts": "^4.8.3",
+    "@truffle/hdwallet-provider": "^2.1.10",
+    "dotenv": "^16.0.3",
+    "truffle": "^5.8.4",
+    "truffle-plugin-verify": "^0.6.3"
+  }
+}
