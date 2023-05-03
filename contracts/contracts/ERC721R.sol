@@ -343,7 +343,7 @@ contract ERC721r is Context, ERC165, IERC721, IERC721Metadata {
                     tx.gasprice,
                     block.number,
                     block.timestamp,
-                    block.difficulty,
+                    block.prevrandao,
                     blockhash(block.number - 1),
                     address(this),
                     updatedNumAvailableTokens
